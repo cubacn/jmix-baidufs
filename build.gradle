@@ -26,7 +26,6 @@ def isSnapshot=!branchName.equals("master")
 def repoUrl=isSnapshot?aliRepo.snapshot:aliRepo.release
 
 group = 'cn.jmix'
-version = '0.0.1'+(isSnapshot?"-SNAPSHOT":"");
 
 
 subprojects {
@@ -83,12 +82,12 @@ subprojects {
     publishing {
         repositories {
             maven {
-                url = repoUrl
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/" + System.getenv("GITHUB_REPOSITORY"))
                 credentials {
-                    username aliRepo.username
-                    password aliRepo.password
+                    username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
+                    password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
                 }
-                allowInsecureProtocol = true
             }
         }
         publications {

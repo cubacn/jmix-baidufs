@@ -16,5 +16,11 @@ dependencies {
 }
 
 test {
+    if (project.hasProperty('args')) {
+        project.args.split(',').each {
+            def (key, value) = it.replaceFirst('--', "").split('=')
+            systemProperty (StringUtils.trimAllWhitespace((String)key), StringUtils.trimAllWhitespace((String)value ))
+        }
+    }
     useJUnitPlatform()
 }
