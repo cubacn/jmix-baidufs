@@ -1,13 +1,11 @@
-ext.aliRepo = [
-        snapshot: 'https://repo.rdc.aliyun.com/repository/72077-snapshot-057BdJ/',
-        release : 'https://repo.rdc.aliyun.com/repository/72077-release-FWXfLw/',
-        username: project.hasProperty("skd.repo.username") ? project['skd.repo.username'] : '',
-        password: project.hasProperty("skd.repo.password") ? project['skd.repo.password'] : ''
-]
 
 buildscript {
     repositories {
         gradlePluginPortal()
+
+        maven {
+            url 'https://maven.aliyun.com/nexus/content/groups/public/'
+        }
     }
     dependencies {
         classpath "io.jmix.gradle:jmix-gradle-plugin:1.1.0"
