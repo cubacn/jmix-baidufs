@@ -25,6 +25,6 @@ implementation 'cn.jmix:baidufs-starter:1.0.0'
 | jmix.baidufs.secretAccessKey  |         | Secret Access Key 密钥                  |
 | jmix.baidufs.bucket           |         | 存储桶                                  |
 | jmix.baidufs.region           |         | 地域                                    |
-| jmix.baidufs.chunkSize        |   8192  | 每个分片的大小，单位是KB                   |
-| jmix.baidufs.endpointUrl      |         | 访问域名                                 |
+| jmix.baidufs.chunkSize        |   8192  | 块大小，单位是KB                          |
+| jmix.baidufs.endpointUrl      |         | 服务端点地址                              |
 
