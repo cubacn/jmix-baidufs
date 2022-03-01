@@ -8,7 +8,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath "io.jmix.gradle:jmix-gradle-plugin:1.1.0"
+        classpath "io.jmix.gradle:jmix-gradle-plugin:1.1.3"
     }
 }
 
@@ -23,26 +23,11 @@ subprojects {
     apply plugin: 'io.jmix'
 
     repositories {
-        mavenLocal()
-        maven {
-            url 'https://global.repo.jmix.io/repository/public'
-        }
         maven {
             url 'https://maven.aliyun.com/nexus/content/groups/public/'
         }
         maven {
-            url aliRepo.release
-            credentials {
-                username(aliRepo.username)
-                password(aliRepo.password)
-            }
-        }
-        maven {
-            url aliRepo.snapshot
-            credentials {
-                username(aliRepo.username)
-                password(aliRepo.password)
-            }
+            url 'https://global.repo.jmix.io/repository/public'
         }
     }
 
