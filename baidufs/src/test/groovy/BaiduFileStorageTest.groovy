@@ -23,46 +23,27 @@ class BaiduFileStorageTest extends Specification {
     @Autowired
     private FileStorage fileStorage
 
-    def "save stream"(){
+
+    def "save open remove"(){
         def fileName=UuidProvider.createUuid().toString()+".txt";
-        def fileStream=this.getClass().getClassLoader().getResourceAsStream("files/simple.txt");
-        def fileRef=fileStorage.saveStream(fileName,fileStream);
+        String string = "Text for testing.";
+        InputStream inputStream = new ByteArrayInputStream(string.getBytes());
+        def fileRef=fileStorage.saveStream(fileName,inputStream);
+        def fileExists= fileStorage.fileExists(fileRef)
         def openedStream=fileStorage.openStream(fileRef);
+        def fileOpened =openedStream!=null
+        fileStorage.removeFile(fileRef)
         expect:
-            openedStream!=null
+        verifyAll {
+            fileExists
+            fileOpened
+        }
     }
 
-
-    def "fileExists"() {
-        def storageName = fileStorage.getStorageName()
-        def fileKey = "2021/11/09/6b63e503-c213-f324-d6df-a43fc66cefaf.txt"
-        def fileName="6b63e503-c213-f324-d6df-a43fc66cefaf.txt"
-
-        def fileref = new FileRef(storageName, fileKey, fileName);
-        def exists = fileStorage.fileExists(fileref)
-
-        expect:  exists
-
-    }
-
-
-    def "removeFile"(){
-        def storageName = fileStorage.getStorageName()
-        def fileKey = "2021/11/09/6b63e503-c213-f324-d6df-a43fc66cefaf.txt"
-        def fileName="6b63e503-c213-f324-d6df-a43fc66cefaf.txt"
-
-        def fileref = new FileRef(storageName, fileKey, fileName);
-        fileStorage.removeFile(fileref)
-
-
-        def exists = fileStorage.fileExists(fileref)
-
-        expect:  !exists
-    }
-
-
-    def "Baidu storage initialized"() {
+    def "baidu storage initialized"() {
         expect:
         fileStorage.getStorageName() == BaiduFileStorage.DEFAULT_STORAGE_NAME
     }
+
+
 }
