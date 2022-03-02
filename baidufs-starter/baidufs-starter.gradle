@@ -1,4 +1,4 @@
-archivesBaseName = 'baidufs-starter'
+archivesBaseName = 'jmixcn-baidufs-starter'
 
 jmix {
     entitiesEnhancing {
