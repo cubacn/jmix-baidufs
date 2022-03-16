@@ -7,7 +7,10 @@ archivesBaseName = 'jmixcn-baidufs'
 
 dependencies {
     api 'io.jmix.core:jmix-core'
-    api 'com.baidubce:bce-java-sdk:0.10.181'
+    api ('com.baidubce:bce-java-sdk:0.10.181') {
+        exclude group: 'tomcat', module: 'jasper-compiler'
+        exclude group: 'tomcat', module: 'jasper-runtime'
+    }
 
     testImplementation 'org.springframework.boot:spring-boot-test'
     testImplementation 'org.springframework:spring-test'
